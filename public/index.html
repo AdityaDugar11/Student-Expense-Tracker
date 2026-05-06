@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Expense Tracker | Track Your Daily Spending</title>
+    <meta name="description" content="A simple expense tracker for students to manage coffee, travel, and food expenses daily.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">💰 ExpenseTracker</div>
+        <a href="/app" class="nav-cta">Open App →</a>
+    </nav>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <p class="hero-tag">🎓 Built for Students, by a Student</p>
+            <h1 class="hero-title">
+                Track Every<br>
+                <span class="gradient-text">Rupee You Spend</span>
+            </h1>
+            <p class="hero-subtitle">
+                Coffee ☕ · Travel 🚗 · Food 🍕<br>
+                Know where your money goes. Simple. Free. No BS.
+            </p>
+            <a href="/app" class="hero-btn" id="hero-btn">
+                Start Tracking →
+            </a>
+        </div>
+
+        <!-- 3D Canvas goes here -->
+        <div class="hero-3d" id="hero-3d">
+            <canvas id="three-canvas"></canvas>
+        </div>
+    </section>
+
+    <!-- ============ FEATURES SECTION ============ -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Use This? 🤔</h2>
+        <p class="section-subtitle">Because your wallet deserves better than "I don't know where my money went"</p>
+
+        <div class="features-grid">
+            <div class="feature-card" data-scroll>
+                <div class="feature-icon">➕</div>
+                <h3>Add Expenses</h3>
+                <p>Quickly add what you spent — coffee, auto fare, canteen food. Takes 5 seconds.</p>
+            </div>
+            <div class="feature-card" data-scroll>
+                <div class="feature-icon">📋</div>
+                <h3>View Everything</h3>
+                <p>See all your expenses in one clean list. Sorted by date. No clutter.</p>
+            </div>
+            <div class="feature-card" data-scroll>
+                <div class="feature-icon">🗑️</div>
+                <h3>Delete Mistakes</h3>
+                <p>Added something by accident? One click and it's gone. Simple.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How It Works 🔧</h2>
+        <p class="section-subtitle">Three steps. That's it. Even your hostel roommate can use it.</p>
+
+        <div class="steps-container">
+            <div class="step" data-scroll>
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Type what you spent</h3>
+                    <p>Enter the name, amount, and pick a category — coffee, travel, food, or other.</p>
+                </div>
+            </div>
+            <div class="step" data-scroll>
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Hit Add</h3>
+                    <p>Click the button. Your expense gets saved to the cloud database instantly.</p>
+                </div>
+            </div>
+            <div class="step" data-scroll>
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Track & Manage</h3>
+                    <p>See your total spending, browse past expenses, and delete ones you don't need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TECH STACK ============ -->
+    <section class="tech-stack" id="tech-stack">
+        <h2 class="section-title">Built With 🛠️</h2>
+        <p class="section-subtitle">Real technologies. Not just HTML and prayers.</p>
+
+        <div class="tech-grid">
+            <div class="tech-item" data-scroll>
+                <div class="tech-logo">📄</div>
+                <span>HTML/CSS/JS</span>
+            </div>
+            <div class="tech-item" data-scroll>
+                <div class="tech-logo">🟢</div>
+                <span>Node.js</span>
+            </div>
+            <div class="tech-item" data-scroll>
+                <div class="tech-logo">🚂</div>
+                <span>Express.js</span>
+            </div>
+            <div class="tech-item" data-scroll>
+                <div class="tech-logo">🍃</div>
+                <span>MongoDB Atlas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CTA SECTION ============ -->
+    <section class="cta-section" id="cta">
+        <div class="cta-content" data-scroll>
+            <h2>Ready to Stop Guessing? 💸</h2>
+            <p>Start tracking your expenses right now. It's free forever.</p>
+            <a href="/app" class="cta-btn">Open Expense Tracker →</a>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <p>Made with ❤️ by a 1st Year Student | 2026</p>
+        <p class="footer-sub">Full Stack Project · Node.js + Express + MongoDB</p>
+    </footer>
+
+    <!-- Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP + ScrollTrigger from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Our JS -->
+    <script src="js/landing.js"></script>
+</body>
+</html>

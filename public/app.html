@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Add & Manage Your Expenses</title>
+    <meta name="description" content="Track your daily student expenses - coffee, travel, food and more.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">💰 ExpenseTracker</a>
+        <div class="nav-right">
+            <span class="nav-total" id="nav-total">Total: ₹0</span>
+        </div>
+    </nav>
+
+    <!-- ============ MAIN CONTAINER ============ -->
+    <main class="container">
+
+        <!-- LEFT SIDE - Add Expense Form -->
+        <section class="form-section">
+            <h2 class="form-title">Add New Expense ➕</h2>
+
+            <form id="expense-form">
+                <!-- expense name -->
+                <div class="form-group">
+                    <label for="expense-name">What did you spend on?</label>
+                    <input
+                        type="text"
+                        id="expense-name"
+                        placeholder="e.g. Coffee at canteen"
+                        required
+                    >
+                </div>
+
+                <!-- amount -->
+                <div class="form-group">
+                    <label for="expense-amount">How much? (₹)</label>
+                    <input
+                        type="number"
+                        id="expense-amount"
+                        placeholder="e.g. 50"
+                        min="1"
+                        required
+                    >
+                </div>
+
+                <!-- category -->
+                <div class="form-group">
+                    <label for="expense-category">Category</label>
+                    <select id="expense-category" required>
+                        <option value="">Pick a category...</option>
+                        <option value="coffee">☕ Coffee</option>
+                        <option value="travel">🚗 Travel</option>
+                        <option value="food">🍕 Food</option>
+                        <option value="other">📦 Other</option>
+                    </select>
+                </div>
+
+                <!-- date -->
+                <div class="form-group">
+                    <label for="expense-date">Date</label>
+                    <input
+                        type="date"
+                        id="expense-date"
+                    >
+                </div>
+
+                <!-- submit button -->
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    Add Expense 💸
+                </button>
+            </form>
+
+            <!-- status message -->
+            <div class="status-msg" id="status-msg"></div>
+        </section>
+
+        <!-- RIGHT SIDE - Expense List -->
+        <section class="list-section">
+            <div class="list-header">
+                <h2 class="list-title">Your Expenses 📋</h2>
+                <span class="expense-count" id="expense-count">0 entries</span>
+            </div>
+
+            <!-- loading spinner -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading expenses...</p>
+            </div>
+
+            <!-- empty state -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <p class="empty-icon">🤷</p>
+                <p>No expenses yet! Start adding some.</p>
+            </div>
+
+            <!-- expense list -->
+            <div class="expense-list" id="expense-list">
+                <!-- expenses will be added here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Our JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
