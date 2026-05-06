@@ -121,8 +121,5 @@ expenses tracker/
 
 ---
 
-## 👨‍💻 Made By
-
-A 1st Year Engineering Student — learning full stack development one project at a time 🎓
 
 ---
