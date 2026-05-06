@@ -7,11 +7,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const path = require('path');
 
 // load the .env file so we can use the MongoDB URL
-dotenv.config();
+// (on Vercel, env vars are set in the dashboard instead)
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 // create the express app
 const app = express();
@@ -23,16 +25,27 @@ app.use(express.json());                  // parses JSON data from requests
 app.use(express.static(path.join(__dirname, 'public')));  // serve our frontend files
 
 // ====================================
-// MongoDB Connection
+// MongoDB Connection (with caching for serverless)
 // ====================================
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
+// in serverless (like Vercel), we cache the connection
+// so it doesn't reconnect on every request
+let isConnected = false;
+
+async function connectDB() {
+  if (isConnected) return;
+
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    isConnected = true;
     console.log('✅ Connected to MongoDB Atlas!');
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log('❌ MongoDB connection error:', err.message);
-  });
+  }
+}
+
+// connect right away
+connectDB();
 
 // ====================================
 // Expense Schema (like a blueprint)
@@ -60,7 +73,8 @@ const expenseSchema = new mongoose.Schema({
 });
 
 // create the model from the schema
-const Expense = mongoose.model('Expense', expenseSchema);
+// (check if it already exists to avoid errors in serverless)
+const Expense = mongoose.models.Expense || mongoose.model('Expense', expenseSchema);
 
 // ====================================
 // API Routes
@@ -68,6 +82,7 @@ const Expense = mongoose.model('Expense', expenseSchema);
 
 // GET all expenses - when someone visits /api/expenses
 app.get('/api/expenses', async (req, res) => {
+  await connectDB();
   try {
     // find all expenses, newest first
     const expenses = await Expense.find().sort({ date: -1 });
@@ -80,6 +95,7 @@ app.get('/api/expenses', async (req, res) => {
 
 // POST a new expense - when someone adds a new expense
 app.post('/api/expenses', async (req, res) => {
+  await connectDB();
   try {
     // get the data from the request body
     const { name, amount, category, date } = req.body;
@@ -110,6 +126,7 @@ app.post('/api/expenses', async (req, res) => {
 
 // DELETE an expense - when someone wants to remove an expense
 app.delete('/api/expenses/:id', async (req, res) => {
+  await connectDB();
   try {
     const deletedExpense = await Expense.findByIdAndDelete(req.params.id);
 
@@ -140,10 +157,15 @@ app.get('/app', (req, res) => {
 });
 
 // ====================================
-// Start the server
+// Start the server (only when running locally, not on Vercel)
 // ====================================
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`📊 Open your browser and go to http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`📊 Open your browser and go to http://localhost:${PORT}`);
+  });
+}
+
+// export the app for Vercel serverless
+module.exports = app;
